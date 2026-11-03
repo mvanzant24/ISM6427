@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,15 @@
   <div class="bg"></div>
 
   <main class="app">
+    <header class="top">
+      <div id="greeting" class="greeting">Hello, Michelle</div>
+      <div class="glass themes" role="group" aria-label="Theme">
+        <button data-theme="light">Light</button>
+        <button data-theme="dark">Dark</button>
+        <button data-theme="system">System</button>
+      </div>
+    </header>
+
     <form id="search" class="glass search" autocomplete="off">
       <input id="query" type="text" placeholder="Search city…" aria-label="Search city">
       <button type="submit" aria-label="Search">⌕</button>

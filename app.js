@@ -40,7 +40,6 @@ function render(name, d) {
   const c = d.current, day = d.daily;
   const now = info(c.weather_code, c.is_day);
 
-  document.body.classList.toggle("night", !c.is_day);
   $("city").textContent = name;
   $("temp").textContent = `${r(c.temperature_2m)}°`;
   $("desc").textContent = now.text;
@@ -88,5 +87,23 @@ $("search").addEventListener("submit", async (e) => {
     $("desc").textContent = "Search failed.";
   }
 });
+
+// Greeting
+const hr = new Date().getHours();
+const part = hr < 12 ? "Good morning" : hr < 18 ? "Good afternoon" : "Good evening";
+$("greeting").textContent = `${part}, Michelle`;
+
+// Theme: light / dark / system, remembered per browser
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  document.querySelectorAll(".themes button").forEach((b) =>
+    b.classList.toggle("active", b.dataset.theme === t));
+  try { localStorage.setItem("theme", t); } catch {}
+}
+document.querySelectorAll(".themes button").forEach((b) =>
+  b.addEventListener("click", () => setTheme(b.dataset.theme)));
+let saved = "system";
+try { saved = localStorage.getItem("theme") || "system"; } catch {}
+setTheme(saved);
 
 load(DEFAULT);
